@@ -20,23 +20,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 80px 28px 96px;
+      padding: 25px 28px 96px;
       position: relative;
       overflow: hidden;
     }
 
-    .draw-hero::before {
-      content: '心';
-      position: absolute;
-      font-family: 'Zen Antique', serif;
-      font-size: 480px;
-      color: rgba(196,97,74,0.045);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      transition: opacity 0.6s ease;
-    }
 
     .draw-hero.drawn::before { opacity: 0; }
 
@@ -87,70 +75,55 @@
       color: var(--brown-mid);
       line-height: 1.85;
       max-width: 440px;
-      margin: 0 auto 52px;
+      margin: 0 auto 32px;
     }
-
     /* Deck stack visual */
     .deck-stack {
       position: relative;
-      width: 180px;
-      height: 288px;
-      margin: 0 auto 40px;
+      width: min(260px, 70vw);
+      aspect-ratio: 5 / 8;
+      margin: 8px auto 40px;
       cursor: pointer;
     }
 
-    .deck-stack .layer {
+    .deck-stack .layer,
+    .card-back-image {
       position: absolute;
       inset: 0;
-      border-radius: 10px;
-      background: linear-gradient(155deg, #e8dcc8 0%, #d6caaf 100%);
+      border-radius: 14px;
+    }
+
+    .deck-stack .layer {
+      background: #e8dcc8;
       border: 1px solid rgba(180,140,110,0.35);
       box-shadow: 0 4px 20px rgba(80,40,20,0.1);
     }
 
-    .deck-stack .layer-3 { transform: rotate(-5deg) translateY(8px); opacity: 0.45; }
-    .deck-stack .layer-2 { transform: rotate(-2deg) translateY(4px); opacity: 0.7; }
-
-    .deck-stack .layer-top {
-      background: linear-gradient(155deg, #f0e6d2 0%, #e4d8be 100%);
-      box-shadow: 0 10px 40px rgba(80,40,20,0.18), 0 2px 8px rgba(80,40,20,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
-      z-index: 3;
+    .deck-stack .layer-3 {
+      transform: rotate(-5deg) translateY(8px);
+      opacity: 0.45;
     }
 
-    .deck-stack:hover .layer-top {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 60px rgba(80,40,20,0.22), 0 4px 16px rgba(80,40,20,0.12);
-    }
-
-    .deck-stack .top-kanji {
-      font-family: 'Zen Antique', serif;
-      font-size: 48px;
-      color: var(--terracotta);
-      opacity: 0.28;
-      line-height: 1;
-    }
-
-    .deck-stack .top-ornament {
-      font-size: 12px;
-      color: var(--terracotta);
-      opacity: 0.35;
-      letter-spacing: 0.35em;
-    }
-
-    .deck-stack .top-label {
-      font-size: 8px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .deck-stack .layer-2 {
+      transform: rotate(-2deg) translateY(4px);
       opacity: 0.7;
     }
 
+    .card-back-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 3;
+      box-shadow: 0 10px 40px rgba(80,40,20,0.18), 0 2px 8px rgba(80,40,20,0.1);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .deck-stack:hover .card-back-image {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(80,40,20,0.22);
+    }
+
+    
     .btn-draw {
       background: var(--terracotta);
       color: var(--white-warm);
@@ -437,19 +410,14 @@
 
     <div class="draw-state-intro" id="draw-intro">
       <p class="draw-eyebrow">Seasons of the Heart Oracle</p>
-      <h1 class="draw-title">Draw Your Card</h1>
-      <p class="draw-subtitle">今日の一枚</p>
       <div class="draw-rule"></div>
+      <h1 class="draw-title">Draw Your Card</h1>
       <p class="draw-desc">Still your mind for a moment. When you feel ready, draw a card — and let it speak to whatever you are carrying today.</p>
 
       <div class="deck-stack" onclick="drawCard()">
-        <div class="layer layer-3"></div>
-        <div class="layer layer-2"></div>
-        <div class="layer layer-top">
-          <span class="top-kanji">心</span>
-          <span class="top-ornament">· ✿ ·</span>
-          <span class="top-label">Touch to draw</span>
-        </div>
+          <div class="layer layer-3"></div>
+          <div class="layer layer-2"></div>
+          <img src="card-back.jpg" alt="Card back" class="card-back-image">
       </div>
 
       <button class="btn-draw" onclick="drawCard()">Draw Your Card</button>
