@@ -253,6 +253,30 @@ nav {
   }
 }
 
+/* ── Back to top ── */
+
+.back-to-top {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 999;
+  background: var(--terracotta);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(80,40,20,0.18);
+}
+
+.back-to-top:hover {
+  transform: translateY(-2px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* ── CONTAINERS ── */
 .container { max-width: 800px; margin: 0 auto; padding: 0 28px; }
 .container-wide { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
